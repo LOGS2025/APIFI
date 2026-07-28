@@ -1,0 +1,102 @@
+/* Contenedor principal */
+.container {
+  margin-top: 20px;
+  max-width: 900px;
+  padding: 0 15px;
+}
+
+.container h2 {
+  color: #1976d2;
+  margin-bottom: 5px;
+}
+
+.container > div:first-of-type {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Card que contiene toda la tabla */
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+/* Encabezado de la tabla */
+.table-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px 80px 1fr;
+  gap: 10px;
+  background-color: #1976d2;
+  color: white;
+  padding: 12px 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Cada fila de datos */
+.card > div:not(.table-header) {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px 80px 1fr;
+  gap: 10px;
+  padding: 12px 15px;
+  align-items: center;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+/* Quitar borde al último elemento */
+.card > div:last-child {
+  border-bottom: none;
+}
+
+/* Colores alternados para filas */
+.card > div:nth-child(odd):not(.table-header) {
+  background-color: #ffffff;
+}
+
+.card > div:nth-child(even):not(.table-header) {
+  background-color: #f5f5f5;
+}
+
+/* Hover en filas */
+.card > div:not(.table-header):hover {
+  background-color: #e3f2fd;
+  cursor: pointer;
+}
+
+/* Estilo para el número de grupo */
+.card > div > div:first-child {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+/* Badge para vacantes */
+.vacantes-badge {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  min-width: 30px;
+}
+
+.vacantes-badge.disponible {
+  background-color: #4caf50;
+}
+
+.vacantes-badge.lleno {
+  background-color: #f44336;
+}
+
+/* Última actualización */
+.card > div > div:last-child {
+  font-size: 12px;
+  color: #666;
+}

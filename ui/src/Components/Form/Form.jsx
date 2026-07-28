@@ -1,28 +1,43 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from '../Button/Button';
 import './Forms.css'
 
-const Form = ({peticion, guardar}) => {
+const Form = ({peticion}) => {
 
     const inputRef=useRef();
+    const [cargando, setCargando] = useState(false);
+
 
     const obtenerValor= async ()=>{
-        peticion(inputRef.current.value)
+        const clave = inputRef.current.value.trim();
 
-        if (inputRef.current.value) {
-            const respuesta = await peticion(inputRef.current.value);
-            guardar(respuesta);
+        if (!clave) {
+            alert('Ingresa clave, CHAVO, PORFAVOR');
+            return;
         }
+
+        setCargando(true);
         
+        try {
+            const respuesta = await peticion(clave);
+            inputRef.current.value = ''; // Limpiar input después de buscar
+        } catch (error) {
+            console.error('Error en la petición:', error);
+        } finally {
+            setCargando(false);
+        }
     };
 
-    useEffect(()=>{
-        console.log(inputRef);
-    },[inputRef])
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            obtenerValor();
+        }
+    };
+    
     return (
-        <div>
-           <input ref={inputRef} type="text" /> 
-            <Button method={obtenerValor} text={"Enviar"}/>
+        <div className='container'>
+           <input ref={inputRef} type="text" onKeyPress={handleKeyPress} disabled={cargando}/> 
+            <Button method={obtenerValor} text={cargando ? "Buscando" : "Enviar"} disabled={cargando}/>
         </div>
     );
 };
