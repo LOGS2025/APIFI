@@ -1,0 +1,9 @@
+tunnel: 3dfddcc3-9290-4c9a-abea-dcd7da2b23d0
+credentials-file: /etc/cloudflared/logica_man.json
+
+ingress:
+  - hostname: api.de-morgan.com
+    service: http://my-flask-backend:8000
+
+  - service: http_status:404
+
