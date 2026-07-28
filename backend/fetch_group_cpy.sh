@@ -29,6 +29,9 @@ function url_GET() {
 	'
 }
 
+# Profesor: ING. FRANCISCO JOSE RODRIGUEZ RAMIREZ (PRESENCIAL)Tipo: THorario: 13:00 a 15:00Días: Mar, Jue
+# Gpo.: 10, Cupo: 30
+
 function main() {
 	local NEWDATE=$(url_HEAD $1)
 	local OLDDATE
@@ -49,7 +52,7 @@ function main() {
 	return 0
 }
 
-main $1 
+url_GET $1
 
 # https://www.ssa.ingenieria.unam.mx/cj/tmp/programacion_horarios/508.html?_=1785198272875
 # <a><strong>Gpo.:</strong> 1, <strong>Cupo:</strong> 30</a>

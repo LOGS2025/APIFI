@@ -1,6 +1,5 @@
 # app.py
 from flask import Flask, render_template
-from flask_migrate import Migrate
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 def create_app():

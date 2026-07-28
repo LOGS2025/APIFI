@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Cloudflare Tunnel
+  cloudflare-tunnel:
+    image: cloudflare/cloudflared:latest
+    command: docker run cloudflare/cloudflared:latest tunnel --no-autoupdate run --token eyJhIjoiNGNiZGE1MDk0ZGM3Mzc3MTVkNjM2ZjNlZTJmYzdmNjQiLCJ0IjoiY2FiZmY2MzAtZDBkZi00N2U2LWI1ZGEtOGI2MzA5MWU2NmIxIiwicyI6Ik5tVm1OakUwWldRdFpUaGxOQzAwTVRnd0xXRXdZbVl0WmpJd01HVXhZV016TURKbCJ9
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # Python Web App
+  web:
+    build: .
+    container_name: apifi
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data:/app/data
+
+networks:
+  app-network:
+    driver: bridge
