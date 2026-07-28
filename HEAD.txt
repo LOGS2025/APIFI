@@ -1,0 +1,10 @@
+HTTP/2 200 
+date: Tue, 28 Jul 2026 00:35:46 GMT
+content-type: text/html; charset=utf-8
+server: cloudflare
+last-modified: Mon, 27 Jul 2026 18:00:02 GMT
+vary: Accept-Encoding
+cf-cache-status: DYNAMIC
+set-cookie: _cfuvid=f5VMK3N1fEnwipm_NOurbZePN7d4K74C_sTOSsYsHBU-1785198946.0913568-1.0.1.1-sE1C0Q.R0yngghS7WsNlF25nZBOP7vJn9Tyy4tN3GzU; HttpOnly; SameSite=None; Secure; Path=/; Domain=ingenieria.unam.mx
+cf-ray: a21fce451bedc7d1-QRO
+
