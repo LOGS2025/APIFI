@@ -1,4 +1,4 @@
-import monitor
+import monitor as monitor
 import os
 import subprocess
 from datetime import datetime

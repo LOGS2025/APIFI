@@ -1,8 +1,6 @@
-import data.monitor as monitor
-import os
-import subprocess
 from datetime import datetime
-import json
+import subprocess
+import os
 
 def parseIntoJson(clave):
     course = {}
@@ -39,14 +37,3 @@ def curlToFI(clave):
     )
     
     return result
-
-
-result = curlToFI(1257)
-dicts = parseIntoJson(1257)
-json_string = json.dumps(dicts)
-
-
-# monitor.add_course(1257, json_string)
-
-
-print(monitor.get_course(1257))

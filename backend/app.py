@@ -1,5 +1,6 @@
 # app.py
 from flask import Flask, render_template
+from routes import register_routes
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 def create_app():
@@ -8,7 +9,6 @@ def create_app():
     # Tell Flask to trust proxy headers
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
     
-    from routes import register_routes
     register_routes(app,None)
     #with app.app_context():
     #    db.create_all()
