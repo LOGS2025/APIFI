@@ -1,0 +1,80 @@
+networks:
+  webnet:
+    driver: bridge
+    name: webnet
+
+
+volumes:
+  postgres-db-volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data
+
+
+services:
+  postgres:
+      image: postgres:15
+      environment:
+          - POSTGRES_USER=flask
+          - POSTGRES_PASSWORD=flask_2026_logica
+          - POSTGRES_DB=flask_db
+      volumes:
+          - postgres-db-volume:/var/lib/postgresql/data
+      ports:
+          - "5433:5432"
+      networks:
+          - webnet
+
+
+  pgadmin:
+      image: dpage/pgadmin4
+      environment:
+          PGADMIN_DEFAULT_EMAIL: 'teste@teste.com'
+          PGADMIN_DEFAULT_PASSWORD: 'teste'
+      ports:
+          - 16543:80
+      networks:
+          - webnet
+
+
+  my-flask-backend:
+    build: ./flask_backend
+    container_name: my-flask-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./flask_backend:/app
+    working_dir: /app
+    command: sh -c "pip install -r requirements.txt && gunicorn run:app --bind 0.0.0.0:8000"
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=production
+      - DB_PORT=5432
+      - DB_HOST=postgres
+      - DB_NAME=flask_db
+      - DB_PASSWORD=flask_2026_logica
+      - DB_USER=flask
+      - FIREBASE_CREDENTIALS=${FIREBASE_CREDENTIALS}
+
+
+    depends_on:
+      - postgres
+
+    networks:
+      - webnet
+    restart: unless-stopped
+
+  cloudflared_Webapp_logica_backend:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared_Webapp_logica_backend
+    volumes:
+      - '${PWD}:/etc/cloudflared/'
+    command: tunnel --config /etc/cloudflared/config.yml run
+    restart: unless-stopped
+
+    networks:
+      - webnet
+    depends_on:
+      - my-flask-backend
