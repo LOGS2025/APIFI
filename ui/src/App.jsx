@@ -77,20 +77,9 @@ function App() {
         <h1>Ingresa clave de materia a monitorear</h1>
        </div>
        <Form peticion={buscador}></Form>
-       {contenido}
         {resultado.map((item, index) => (
-            <div key={index} style={{ marginTop: '30px' }}>
-              <div style={{
-                backgroundColor: '#e3f2fd',
-                padding: '8px 15px',
-                borderRadius: '4px',
-                marginBottom: '10px'
-              }}>
-                <strong>🔎 Búsqueda #{index + 1}:</strong> Clave {item.clave}
-                <span style={{ fontSize: '12px', color: '#666', marginLeft: '10px' }}>
-                  ({item.timestamp})
-                </span>
-              </div>
+          <div key={index} style={{ marginTop: '30px' }}>
+                <strong> Búsqueda num.{index + 1}:</strong> Clave {item.clave}
               <Results clave={item.clave} data={item.data} />
             </div>
           ))}

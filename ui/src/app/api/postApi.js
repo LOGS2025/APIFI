@@ -3,7 +3,9 @@ import axios from "axios";
 const URL ='https://apifi.de-morgan.com/'
 
 export const postCupos = async (clave) => {
-    const url = `${URL}postCupos/`; 
+    const url = `${URL}postClave/${clave}`; 
+    console.log('URL:', url);
+
 
     try {
         const response = await axios.post(url, { clave });

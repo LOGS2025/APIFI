@@ -19,7 +19,7 @@ export const getCupos = async (clave)=>{
             data: response.data.data
         };
     } catch (error) {
-        console.error('Error en getSchedule:', error);
+        console.error('Error en getCupos:', error);
         
         return {
             mensaje: "Hubo error",
